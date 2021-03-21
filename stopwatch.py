@@ -1,4 +1,4 @@
-﻿from tkinter import *
+from tkinter import *
 import datetime
 import csv
 import time
@@ -8,6 +8,7 @@ class Window:
     """Create window"""
     def __init__(self):
         # self.move_window = True
+        
         self.root = Tk()
 
         self._saved = Label(self.root, text='saved')
