@@ -121,7 +121,7 @@ class Window:
         """something like a while loop"""
         time.sleep(1)
         self.__id = self.root.after(1, self.tick)
-        self.f_temp = datetime.datetime.fromtimestamp(self.__temp).strftime('%H:%M:%S')  #
+        self.f_temp = datetime.datetime.fromtimestamp(self.__temp).strftime('%H:%M:%S')
         self.time.configure(text=str(self.f_temp))  # replace text label time
         self.__temp += 1
 
