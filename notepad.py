@@ -57,7 +57,7 @@
 # root.mainloop()
 
 
-from tkinter import *
+# from tkinter import *
 #
 # TF = True
 #
