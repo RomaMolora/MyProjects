@@ -1,4 +1,4 @@
-from tkinter import *
+﻿from tkinter import *
 import datetime
 import csv
 import time
@@ -6,17 +6,16 @@ import time
 
 class Window:
     """Create window"""
-    def __init__(self):
-        # self.move_window = True
-        
-        self.root = Tk()
 
+    def __init__(self):
+
+        self.root = Tk()
+        # self.root.overrideredirect(True)
+        self.root.attributes("-topmost", True)
         self._saved = Label(self.root, text='saved')
 
         self.root.resizable(0, 0)
         self.root.title('tick tack')
-
-        # self.root.overrideredirect(self.move_window)
 
         self.root.wait_visibility(self.root)
         self.root.attributes("-alpha", 0.9)
@@ -25,7 +24,7 @@ class Window:
         self.__id = ''  # I have no idea, but without it it doesn't work
 
         self.time = Label(self.root,
-                          font=('Ubuntu', 50),
+                          font=('Ubuntu', 30),
                           text='00:00:00'
                           )
 
@@ -48,23 +47,29 @@ class Window:
                            text='save',
                            command=lambda: self.save_()
                            )
-        #
-        # self.move_ = Button(self.root,
-        #                     text='move',
-        #                     command=lambda: self.move()
-        #                     ).pack()
 
-        self.packs()  # accommodation packs this method
+        self.move_ = Button(self.root,
+                            text='move',
+                            command=lambda: self.move()
+                            )
+
+        self.packs()  # accommodation packs this methods
 
     def packs(self):
         """packs one label(time) and 4 buttons"""
         self.time.pack()
         self.start.pack()
+        self.move_.pack()
 
-    # def move(self):
-    #     if str(self.move_) == '.!button5':
-    #         self.move_window = False
-    #         print(self.move_window)
+    def move(self):
+        if self.root.wm_overrideredirect():
+            self.root.overrideredirect(False)
+            print('yes')
+        else:
+            self.root.overrideredirect(True)
+            print('no')
+        self.root.update()
+
 
     def start(self):
         """start timer"""
@@ -120,8 +125,8 @@ class Window:
 
     def tick(self):
         """something like a while loop"""
-        time.sleep(1)
-        self.__id = self.root.after(1, self.tick)
+        time.sleep(0.1)
+        self.__id = self.root.after(1000, self.tick)
         self.f_temp = datetime.datetime.fromtimestamp(self.__temp).strftime('%H:%M:%S')
         self.time.configure(text=str(self.f_temp))  # replace text label time
         self.__temp += 1
