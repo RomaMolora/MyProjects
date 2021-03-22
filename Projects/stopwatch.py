@@ -28,6 +28,7 @@ class Window:
 
         self.root.wait_visibility(self.root)
         self.root.attributes("-alpha", 0.9)
+        self.root.attributes("-topmost", True)
 
         self.f_temp = ''
 
