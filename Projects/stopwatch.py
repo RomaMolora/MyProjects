@@ -7,8 +7,13 @@ import time
 
 class Window:
     """Create window"""
-
+    count_attr = 0
     def __init__(self):
+
+        Window.count_attr += 1
+        if Window.count_attr > 1:
+            raise AttributeError
+
         self.root = tkinter.Tk()
 
         self.root.protocol("WM_DELETE_WINDOW", [
@@ -65,6 +70,9 @@ class Window:
                                     )
 
         self.packs()  # accommodation packs this methods
+
+    # def __setattr__(self, key, value):
+    #     print(key, value)
 
     def packs(self):
         """packs one label(time) and 4 buttons"""
@@ -126,17 +134,17 @@ class Window:
         with open('Time work.csv', 'a') as time_work:
             csv.writer(time_work, delimiter=',').writerow(list_everything)
 
-    def run(self):
-        """run program"""
-        self.root.mainloop()
-
     def tick(self):
         """something like a while loop"""
         time.sleep(0.1)
         self.__id = self.root.after(1000, self.tick)
-        self.f_temp = datetime.datetime.fromtimestamp(self.__temp).strftime('%H:%M:%S')
+        self.f_temp = datetime.datetime.utcfromtimestamp(self.__temp).strftime('%H:%M:%S')
         self.time.configure(text=str(self.f_temp))  # replace text label time
         self.__temp += 1
+
+    def run(self):
+        """run program"""
+        self.root.mainloop()
 
 
 # self.root.wait_visibility(self.root)

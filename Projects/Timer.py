@@ -1,12 +1,15 @@
+import os
+import platform
+import threading
+import time
 from tkinter import *
 from tkinter import messagebox, ttk
 from tkinter.ttk import Progressbar
-import time, os, platform, threading
 
 root = Tk()
 m = messagebox.askyesnocancel('', '"yes(Да)" - english(Английский), "no(Нет)" - Русский(Russia)')
 
-if m == False:
+if not m:
     a = 'Перезагрузите или выключите компьютер'
     q = 'Если «Да» - выключить компьютер, если «Нет» - перезагрузить компьютер.'
     c = 'Правила'
@@ -18,7 +21,7 @@ if m == False:
     s = 'Секунды -'
     p = 'Нажать Кнопку'
 
-elif m == True:
+elif m:
     a = 'Restart or shutdown the computer '
     q = 'If "yes" - shut down the computer, if "no" - restart the computer.'
     c = 'Rules'
@@ -95,18 +98,21 @@ def ent():
         if isinstance(m, int) and m < 61 or m > 0:
             if isinstance(s, int) and s < 61 or s != 0 or s > 0:
                 if message() == 'yes':
-                    h *= 3600;
-                    m *= 60;
-                    s *= 1;
+                    h *= 3600
+                    m *= 60
+                    s *= 1
                     res = h + m + s
 
                     bar = Progressbar(root, length=200, style='green.Horizontal.TProgressbar')
                     l_bar = Label(root, text=g)
 
                     sms = messagebox.askyesnocancel(a, q)
-                    if sms == True: down_progress('s')
-                    if sms == False: down_progress('r')
-                    if sms == None: pass
+                    if sms:
+                        down_progress('s')
+                    if not sms:
+                        down_progress('r')
+                    if sms is None:
+                        pass
 
 
 b = Button(root, text=p, command=ent)
