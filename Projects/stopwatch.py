@@ -27,7 +27,6 @@ class Window:
         self.root.geometry(f"+{width}+{height}")
 
         self._saved = tkinter.Label(self.root, text='saved')
-
         self.root.resizable(0, 0)
         self.root.title('tick tack')
 
@@ -133,6 +132,7 @@ class Window:
         # open csv file
         with open('Time work.csv', 'a') as time_work:
             csv.writer(time_work, delimiter=',').writerow(list_everything)
+        self.__temp = 0
 
     def tick(self):
         """something like a while loop"""
