@@ -154,6 +154,3 @@ class Window:
 
 if __name__ == '__main__':  # main
     Window().run()  # run program
-
-
-print('Hello World!')
