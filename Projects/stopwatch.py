@@ -8,8 +8,8 @@ import time
 class Window:
     """Create window"""
     count_attr = 0
-    def __init__(self):
 
+    def __init__(self):
         Window.count_attr += 1
         if Window.count_attr > 1:
             raise AttributeError
@@ -95,7 +95,7 @@ class Window:
 
     def stop(self):
         """stop timer"""
-        self.root.after_cancel(self.__id)  # something like a while loop(stops him)
+        self.root.after_cancel(self.__id)  # something like a while loop
         self.stop_.pack_forget()  # hide button stop
         self.continue_.pack()  # show button continue
         self.save.pack()  # show button save
@@ -154,3 +154,6 @@ class Window:
 
 if __name__ == '__main__':  # main
     Window().run()  # run program
+
+
+print('Hello World!')
